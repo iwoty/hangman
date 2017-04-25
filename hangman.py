@@ -40,7 +40,7 @@ def add_spaces_between(word, is_underlined):
     return splitted_word
 
 
-def open_ascii_arts(i):
+def print_ascii_arts(i):
     '''Create list with ASCII arts, print with life_points'''
     ascii_art_list = []
     try:
@@ -55,7 +55,7 @@ def open_ascii_arts(i):
     print(ascii_art_list[i].read())
 
 
-def line(n):
+def print_line(n):
     '''Printing line with lower dash at n-length'''
     print('_'*n)
 
@@ -64,10 +64,10 @@ def main():
     wrong_word = []  # list of wrong guessed whole words
     wrong_letter = []  # list of wrong guessed letters
 
-    line(88)
+    print_line(88)
     print("Welcome to ***The Hangman 4.20 Game***")
     name = input("Enter your name: ")
-    line(88)
+    print_line(88)
     print("Now we will choose name of a capital for you!")
     print("You have 5 lifes, you will lose 1 for wrong answer!")
 
@@ -90,13 +90,13 @@ def main():
 
     while life_points > 0:  # game (loop) is working only if you have at least 1 life point
 
-        line(88)
+        print_line(88)
         print(font_green, "Your number of lifes is:", life_points, font_normal, "\n")  # life_points
         print(font_blue, "Your name of the capital to guess is:", capital_underlined, font_normal)  # _ _ _ _ _ _ _
-        line(50)
+        print_line(50)
         print("Wrong letters guesses are:", ", ".join(wrong_letter))  # join to list of wrong guessed letters
         print("Wrong words guesses are:", ", ".join(wrong_word))  # join to list of wrong guessed words
-        line(50)
+        print_line(50)
 
         stage = input("Do you want to guess ONE LETTER (enter L) or WHOLE WORD (enter W)? ")
 
@@ -108,7 +108,7 @@ def main():
             else:
                 life_points -= 2  # wrong answer = -2 life points
                 print("Wrong guess! You lose 2 life points!")
-                open_ascii_arts(life_points)
+                print_ascii_arts(life_points)
                 wrong_word.append(guess_word.upper())
 
         elif stage.upper() == "L":  # guessing one letter
@@ -133,16 +133,16 @@ def main():
             except ValueError:
                 life_points -= 1
                 print("Wrong letter!")
-                open_ascii_arts(life_points)
+                print_ascii_arts(life_points)
                 wrong_letter.append(guess_letter.upper())
         tries += 1
 
         if life_points == 1:  # if you have left with 1 life point - you're getting a hint
-            line(88)
+            print_line(88)
             print(font_green, "You have left with only 1 life point!", font_normal)
             print(font_green, "We have a hint for you!", font_normal)
             print(font_green, "Name of a country is:", country, font_normal)
-            line(88)
+            print_line(88)
 
     if life_points < 1:
         print(font_green, "You lose!!!!!!", font_normal)
@@ -170,17 +170,17 @@ def main():
 
     highscore = sorted(highscore, key=lambda y: y[int(5)])    # sortujemy wg punktow
 
-    line(129)
+    print_line(129)
     print("You guessed (or not ;) ) after", int(tries), "tries. It took you", player_time, "seconds.")
     print(font_green, "So far highscores (less points is better): ", font_normal, "\n")
     print("      Name       |       Date       |      Time        |      Tries       |   Guessed word   |"
           "      Points      | Result")
-    line(129)
+    print_line(129)
 
     for i in range(len(highscore)):
         highscore[i] = ("|".join(highscore[i]))
     print("".join(highscore[0:10]))
-    line(129)
+    print_line(129)
 
 
 if __name__ == '__main__':
